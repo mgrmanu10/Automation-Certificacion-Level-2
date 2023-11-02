@@ -24,7 +24,6 @@ def order_robots_from_RobotSpareBin():
     Embeds the screenshot of the robot to the PDF receipt.
     Creates ZIP archive of the receipts and the images.
     """    
-    establish_directories()
     open_robot_order_website();
     download_csv_file();
     get_orders();
@@ -102,11 +101,3 @@ def embed_screenshot_to_receipt(screenshot, pdf_file):
     
 def archive_receipts():
     lib.archive_folder_with_zip('./output/receipts', 'output/receipts.zip', recursive=True)
-
-def establish_directories():
-    dir_exist = FileSystem.Path('output').is_dir()
-    if dir_exist:
-        FileSystem.FileSystem().remove_directory('output', True)
-    FileSystem.Path('output/screenshots').mkdir(parents=True, exist_ok=True)
-    FileSystem.Path('output/receipts').mkdir(parents=True, exist_ok=True)
-    file_sys.create_file("output/output.robolog")
